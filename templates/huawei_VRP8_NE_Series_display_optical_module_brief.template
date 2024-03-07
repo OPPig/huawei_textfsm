@@ -1,0 +1,21 @@
+Value Port (\S+)
+Value Status (up|down)
+Value Duplex (\S+)
+Value Type (\S+)
+Value List Wavelength (\d+\S+)
+Value List RxPower ((\-)?\d+(\.\d{1,2})?dBm)
+Value List TxPower ((\-)?\d+(\.\d{1,2})?dBm)
+Value Mode (MultiMode|SingleMode|CopperMode)
+Value VendorPN (\S+)
+
+Start
+#1G/10G
+  ^${Port}\s+${Status}\s+${Duplex}\s+${Type}\s+${Wavelength}\s+${RxPower}\s+${TxPower}\s+${Mode}\s+${VendorPN} -> Continue.Record
+#100G
+  ^${Port}\s+${Status}\s+${Duplex}\s+${Type}\s+${Wavelength}\s+${RxPower}\s+${TxPower}\s+${Mode}\s+${VendorPN} -> Continue
+  ^\s+${Wavelength}\(Lane0\)\s+${RxPower}\s+${TxPower}\s+ -> Continue
+  ^\s+${Wavelength}\(Lane1\)\s+${RxPower}\s+${TxPower}\s+ -> Continue
+  ^\s+${Wavelength}\(Lane2\)\s+${RxPower}\s+${TxPower}\s+ -> Continue
+  ^\s+${Wavelength}\(Lane3\)\s+${RxPower}\s+${TxPower}\s+ -> Record
+#电模块
+  ^${Port}\s+${Status}\s+${Duplex}\s+${Type}\s+unknown\s+\-\-\s+\-\-\s+${Mode}\s+${VendorPN} -> Record

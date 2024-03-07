@@ -1,0 +1,10 @@
+Value Collection_time (.*)
+Value System_Total_Memory (\d+\s\w+)
+Value Total_Memory_Used (\d+\s\w+)
+Value Memory_Using_Percentage (\d+\%)
+
+Start
+  ^Memory utilization statistics at ${Collection_time}
+  ^System Total Memory: ${System_Total_Memory}  
+  ^Total Memory Used: ${Total_Memory_Used}   
+  ^Memory Using Percentage: ${Memory_Using_Percentage}   

@@ -1,0 +1,12 @@
+Value Filldown Slot (\d+)
+Value Card (\S+)
+Value Type (\S+)
+Value Online (\w+)
+Value Power (\w+)
+Value Register (\w+)
+Value Alarm (\w+)
+Value Required Primary (\w+)
+
+Start
+  ^${Slot}\s+${Card}\s+${Type}\s+${Online}\s+${Power}\s+${Register}\s+${Alarm}\s+${Primary} -> Record
+  ^\s+${Card}\s+${Type}\s+${Online}\s+${Power}\s+${Register}\s+${Alarm}\s+${Primary} -> Record

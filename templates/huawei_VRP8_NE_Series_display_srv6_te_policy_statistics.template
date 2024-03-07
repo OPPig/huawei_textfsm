@@ -1,0 +1,4 @@
+Value Policy_num (\d+)
+
+Start
+  ^\S+\s+:\s+${Policy_num} -> Record

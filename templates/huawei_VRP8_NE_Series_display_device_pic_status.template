@@ -1,0 +1,9 @@
+Value Pic (\d+\/\d+)
+Value Status (\S+)
+Value Type (\S+)
+Value Port_count (\d+)
+Value Init_result (\S+)
+Value Logic_down (\S+)
+
+Start
+  ^${Pic}\s+${Status}\s+${Type}\s+${Port_count}\s+${Init_result}\s+${Logic_down} -> Record

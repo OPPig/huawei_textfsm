@@ -1,0 +1,29 @@
+Value Segment_List (\S+)
+Value Segment_List_ID (\d+)
+Value XcIndex (\d+)
+Value List_State (\S+)
+Value DelayTimerRemain (\S+)
+Value Verification_State (\S+)
+Value SuppressTimeRemain (\S+)
+Value PMTU (\d+)
+Value Active_PMTU (\d+)
+Value Weight (\d+)
+Value BFD_State (.*)
+Value Network_Slice_ID (.*)
+Value List SID ([A-Fa-f0-9:\.]+)
+
+
+#处理Candidate-path Count到Segment-List Count
+Start
+ ^\s+Segment-List\s+: ${Segment_List}
+ ^\s+Segment-List ID\s+: ${Segment_List_ID}\s+XcIndex\s+: ${XcIndex}  
+ ^\s+List State\s+: ${List_State}\s+DelayTimerRemain\s+: ${DelayTimerRemain}
+ ^\s+Verification State\s+: ${Verification_State}\s+SuppressTimeRemain\s+: ${SuppressTimeRemain}
+ ^\s+PMTU\s+: ${PMTU}\s+Active PMTU\s+: ${Active_PMTU}
+ ^\s+Weight\s+: ${Weight}\s+BFD State\s+: ${BFD_State}
+ ^\s+Network Slice ID\s+: ${Network_Slice_ID}
+ ^\s+SID :\s+ -> SID
+
+SID
+ ^\s+${SID}
+ ^. -> EOF

@@ -1,0 +1,7 @@
+Value Slot (\S+)
+Value Slot_name (\S+)
+Value CPU_Usage (\d+%)
+Value Memory_Usage (\d+%)
+
+Start
+  ^${Slot}\s+${Slot_name}\s+${CPU_Usage}\s+${Memory_Usage}  -> Record

@@ -1,0 +1,77 @@
+Value Interface (\S+)
+Value Transceiver_Type (\S+)
+Value Connector_Type (\w+)
+Value Wavelength (\d+)	
+Value List Transfer_Distance (\d+\(\S+\sOM\d+\))	
+Value Digital_Diagnostic_Monitoring (\w+)
+Value Vendor_Name (\w+)
+Value Vendor_Part_Number (\w+)
+Value Ordering_Name (\S+)
+Value Serial_Number (\S+)
+Value Manufacturing_Date (\S+)
+Value Manufacture_Vendor_Name (\S+)
+Value List Alarm (.+)
+Value Temperature_Celsius (-?\d+\.\d{2})
+Value Voltage_V (-?\d+\.\d{2})
+Value List Bias_Current (\S+)
+Value Bias_High_Threshold_mA (\S+)
+Value Bias_Low_Threshold_mA (\S+)
+Value List Current_RX_Power_dBm (\S+)
+Value Default_RX_Power_High_Threshold_dBm (-?\d+\.\d{2})
+Value Default_RX_Power_Low_Threshold_dBm (-?\d+\.\d{2})
+Value List Current_TX_Power_dBm (\S+)
+Value Default_TX_Power_High_Threshold_dBm (-?\d+\.\d{2})
+Value Default_TX_Power_Low_Threshold_dBm (-?\d+\.\d{2})
+
+Start
+  ^\s+\S+\s+transceiver information: -> Continue.Record
+  ^\s+${Interface} transceiver information:
+  ^-------------------------------------------------------------------
+  ^\s+Common information:
+  ^\s+Transceiver Type\s+:${Transceiver_Type}
+  ^\s+Connector Type\s+:${Connector_Type}
+  ^\s+Wavelength \(nm\)\s+:${Wavelength}
+  ^\s+Transfer Distance \(m\)\s+:${Transfer_Distance}
+  ^\s+${Transfer_Distance} -> Continue
+  ^\s+Digital Diagnostic Monitoring\s+:${Digital_Diagnostic_Monitoring}
+  ^\s+Vendor Name\s+:${Vendor_Name}
+  ^\s+Vendor Part Number\s+:${Vendor_Part_Number}
+  ^\s+Ordering Name\s+:${Ordering_Name}
+  ^-------------------------------------------------------------------
+  ^ Manufacture information:
+  ^\s+Manu\. Serial Number\s+:${Serial_Number}
+  ^\s+Manufacturing Date\s+:${Manufacturing_Date}
+  ^\s+Vendor Name\s+:${Manufacture_Vendor_Name}
+  ^-------------------------------------------------------------------
+  ^ Alarm information: -> ALARM
+
+ALARM
+  ^   ${Alarm}
+  ^------------------------------------------------------------------- -> DIAG
+
+DIAG
+  ^ Diagnostic information: 
+  ^\s+Temperature \(Celsius\)\s+:${Temperature_Celsius}
+  ^\s+Voltage \(V\)\s+:${Voltage_V} -> BIAS
+
+BIAS
+  ^\s+Bias Current\s+\(mA\)\s+:${Bias_Current}\s+\(Lane\d\|Lane\d\)
+  ^\s+${Bias_Current}\s+\(Lane\d\|Lane\d\)
+  ^\s+Bias Current\s+\(mA\)\s+:${Bias_Current}
+  ^\s+ Bias High Threshold \(mA\)\s+:${Bias_High_Threshold_mA}
+  ^\s+ Bias Low Threshold \(mA\)\s+:${Bias_Low_Threshold_mA} -> CUR_RX_POW
+
+CUR_RX_POW
+  ^\s+ Current RX Power \(dBm\)\s+:${Current_RX_Power_dBm}\s+\(Lane\d\|Lane\d\)                                          
+  ^\s+${Current_RX_Power_dBm}\s+\(Lane\d\|Lane\d\)
+  ^\s+ Current RX Power \(dBm\)\s+:${Current_RX_Power_dBm}
+  ^\s+ Default RX Power High Threshold \(dBm\) :${Default_RX_Power_High_Threshold_dBm}
+  ^\s+ Default RX Power Low Threshold \(dBm\)  :${Default_RX_Power_Low_Threshold_dBm} -> CUR_TX_POW
+
+CUR_TX_POW
+  ^\s+ Current TX Power \(dBm\)\s+:${Current_TX_Power_dBm}\s+\(Lane\d\|Lane\d\)                                         
+  ^\s+${Current_TX_Power_dBm}\s+\(Lane\d\|Lane\d\)
+  ^\s+ Current TX Power \(dBm\)\s+:${Current_TX_Power_dBm}
+  ^\s+ Default TX Power High Threshold \(dBm\) :${Default_TX_Power_High_Threshold_dBm}
+  ^\s+ Default TX Power Low Threshold \(dBm\)  :${Default_TX_Power_Low_Threshold_dBm} 
+  ^------------------------------------------------------------------- -> Start

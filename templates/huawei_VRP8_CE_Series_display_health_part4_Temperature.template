@@ -1,0 +1,15 @@
+Value Slot (\d+)
+Value Card (\S+)
+Value SensorID (\d+)
+Value Status (\w+)
+Value Major (\d+)
+Value Fatal (\d+)
+Value Current (\d+)
+
+# 后面三个的单位是Celsius(摄氏度)
+Start
+  ^Temperature: -> Temperature01
+  
+Temperature01
+  ^\s+${Slot}\s+${Card}\s+${SensorID}\s+${Status}\s+${Major}\s+${Fatal}\s+${Current}
+  ^\s+${Card}\s+${SensorID}\s+${Status}\s+${Major}\s+${Fatal}\s+${Current} -> Record

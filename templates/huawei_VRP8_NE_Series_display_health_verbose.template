@@ -1,0 +1,7 @@
+Value Slot (\d+)
+Value CPU_Usage ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+Value Memory_Usage ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+Value Physical_Usage ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+
+Start
+ ^${Slot}\s+\S+\s+${CPU_Usage}\s+${Memory_Usage}\s+.*\s+${Physical_Usage}\s+.*MB -> Record

@@ -1,0 +1,23 @@
+Value PolicyName (\S+)
+Value Color (\d+)
+Value Endpoint ([A-Fa-f0-9:\.]+)
+Value TunnelId (\d+)
+Value Binding_SID ([A-Fa-f0-9:\.]+)
+Value TunnelType (.*\w)
+Value DelayTimerRemain (\S+)
+Value Policy_State (Up|Down)
+Value State_Change_Time (\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2})
+Value Admin_State (Up|Down)
+Value Traffic_Statistics (\S+)
+Value Backup_Hot_Standby (\S+)
+Value BFD (\S+)
+
+#处理PolicyName到Candidate-path Count之前
+Start
+ ^PolicyName : ${PolicyName}
+ ^Color\s+: ${Color}\s+Endpoint\s+: ${Endpoint}
+ ^TunnelId\s+: ${TunnelId}\s+Binding SID\s+: ${Binding_SID}
+ ^TunnelType\s+: ${TunnelType}\s{2,}DelayTimerRemain\s+:\s${DelayTimerRemain}
+ ^Policy State\s+: ${Policy_State}\s+State Change Time    : ${State_Change_Time}
+ ^Admin State\s+: ${Admin_State}\s+Traffic Statistics   : ${Traffic_Statistics}
+ ^Backup Hot-Standby\s+: ${Backup_Hot_Standby}\s+BFD\s{18}: ${BFD} -> Record

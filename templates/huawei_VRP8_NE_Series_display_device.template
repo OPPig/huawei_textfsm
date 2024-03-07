@@ -1,0 +1,11 @@
+Value Slot (\d)
+Value Type (\S+)
+Value Online (\S+)
+Value Register (\S+)
+Value Status (\S+)
+Value Role (\S+)
+Value LsId (\d)
+Value Primary (\S+)
+
+Start
+  ^${Slot}\s+${Type}\s+${Online}\s+${Register}\s+${Status}\s+${Role}\s+${LsId}\s+${Primary} -> Record

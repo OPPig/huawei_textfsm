@@ -1,0 +1,13 @@
+Value power_supply_mode (\S+)
+Value temperature (\d+)
+Value Item (\S+)
+Value Limit (\d+)
+Value Assigned (\d+)
+Value Assigned_Limit ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+Value Left (\d+)
+Value Real (\d+)
+Value Real_Limit ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+
+Start
+  ^\s+power-supply\s+mode:${power_supply_mode}\s+temperature:${temperature}
+  ^${Item}\s+${Limit}\s+${Assigned}\s+${Assigned_Limit}\s+${Left}\s+${Real}\s+${Real_Limit} -> Record

@@ -1,0 +1,7 @@
+Value Record_Time (.*)
+Value Memory_Using_Percentage ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+
+# 简易版本
+Start
+  ^Memory utilization statistics at ${Record_Time}
+  ^Memory Using Percentage Is: ${Memory_Using_Percentage} -> Record

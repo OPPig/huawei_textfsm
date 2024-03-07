@@ -1,0 +1,16 @@
+Value Slotid (\d+)
+Value Present (\S+)
+Value Registered (\S+)
+Value Status (\S+)
+Value List FanSpeed (\[\d+\]\d+\%)
+
+Start
+  ^Slotid\s+:\s+\d+ -> Continue.Record
+  ^Slotid\s+:\s+${Slotid}
+  ^Present\s+:\s+${Present}
+  ^Registered:\s+${Registered}
+  ^Status\s+:\s+${Status}
+  ^FanSpeed\s+:\s+[No.]Speed
+  ^\s+${FanSpeed}* -> Continue
+  ^(\s+\[\d+\]\d+\%){1}\s+${FanSpeed}* -> Continue
+  ^(\s+\[\d+\]\d+\%){2}\s+${FanSpeed}* -> Continue

@@ -1,0 +1,22 @@
+Value clock_source (.*)
+Value clock_stratum (.*)
+Value clock_status (.*)
+Value reference_clock_ID (.*)
+Value reach (.*)
+Value current_poll (.*)
+Value now (.*)
+Value offset (.*)
+Value delay (.*)
+Value disper (.*)
+
+Start
+  ^\s+clock source:\s+${clock_source}
+  ^\s+clock stratum:\s+${clock_stratum}
+  ^\s+clock status:\s+${clock_status}
+  ^\s+reference clock ID:\s+${reference_clock_ID}
+  ^\s+reach:\s+${reach}
+  ^\s+current poll:\s+${current_poll}
+  ^\s+now:\s+${now}
+  ^\s+offset:\s+${offset}
+  ^\s+delay:\s+${delay}
+  ^\s+disper:\s+${disper} -> Record

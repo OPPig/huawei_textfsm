@@ -1,0 +1,6 @@
+Value Date (....-..-..)
+Value Time (..:..:..)
+Value TimeZone ([+,-]..:..)
+
+Start
+  ^${Date} ${Time}${TimeZone} -> Record

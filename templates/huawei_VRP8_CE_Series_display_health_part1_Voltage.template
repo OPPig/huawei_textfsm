@@ -1,0 +1,16 @@
+Value Filldown Slot (\d+)
+Value Card (\S+)
+Value SensorID (\d+)
+Value SensorName (\S+)
+Value Status (\w+)
+Value Upper ([0-9]+(.[0-9]{1,3})?)
+Value Lower ([0-9]+(.[0-9]{1,3})?)
+Value Current ([0-9]+(.[0-9]{1,3})?)
+
+# 后面三个的单位是Volt
+Start
+  ^Voltage: -> Voltage01
+  
+Voltage01
+  ^\s+${Slot}\s+${Card}\s+${SensorID}\s+${SensorName}\s+${Status}\s+${Upper}\s+${Lower}\s+${Current}
+  ^\s+${Card}\s+${SensorID}\s+${SensorName}\s+${Status}\s+${Upper}\s+${Lower}\s+${Current} -> Record

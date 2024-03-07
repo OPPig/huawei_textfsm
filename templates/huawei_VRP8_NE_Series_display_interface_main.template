@@ -1,0 +1,71 @@
+Value Interface_Num (\S+\d+\/\d+\/\d+|\S+\d+\/\d+\/\d+\/\d+)
+Value current_State (UP|DOWN|Administratively DOWN)
+Value protocol_current_State (.*)
+Value Link_quality_grade (.*)
+Value Description (.*)
+Value Hardware_address ([a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4})
+Value Vendor_PN (\S+)
+Value Vendor_Name (\S+)
+Value Port_BW (\d+\S+)
+Value Transceiver_max_BW (\d+\S+)
+Value Transceiver_Mode (\S+)
+Value Transmission_Distance (\d+\S+)
+Value WaveLength (^\d+nm)
+
+Value List Cur_Optical_power_Rx ((\-)?\d+(\.\d{2}))
+Value List Cur_Optical_power_Tx ((\-)?\d+(\.\d{2}))
+Value Min_Rx_Warning_range ((\-)?\d+(\.\d{3}))
+Value Min_Tx_Warning_range ((\-)?\d+(\.\d{3}))
+Value Max_Rx_Warning_range ((\-)?\d+(\.\d{3}))
+Value Max_Tx_Warning_range ((\-)?\d+(\.\d{3}))
+Value Last_physical_up_time (.*)
+Value Last_physical_down_time (.*)
+Value Current_system_time (.*)
+Value Statistics_last_cleared (.*)
+Value Input_CRC (\d+)
+Value Input_Symbol (\d+)
+Value Output_Lost (\d+)
+Value Output_Overflow (\d+)
+Value Output_Underrun (\d+)
+
+#取值CRC和Lost参数，其他没有做记录，不取逻辑接口仅查询物理接口
+Start
+  #非100G接口MPO场景（UP或者DOWN LOS）
+  ^${Interface_Num} current state : ${current_State} (ifindex: \d+)
+  ^Line protocol current state : ${protocol_current_State} 
+  ^Link quality grade : ${Link_quality_grade}
+  ^Description: ${Description}
+  ^.*Hardware address is ${Hardware_address}
+  ^The Vendor PN is ${Vendor_PN}
+  ^The Vendor Name is ${Vendor_Name}
+  ^Port BW: ${Port_BW}, Transceiver max BW: ${Transceiver_max_BW}, Transceiver Mode: ${Transceiver_Mode}
+  ^WaveLength: ${WaveLength}, Transmission Distance: ${Transmission_Distance}
+  ^Rx Power:  $(Cur_Optical_power_Rx)dBm, Warning range: [${Min_Rx_Warning_range},  ${Max_Rx_Warning_range}]dBm
+  ^Tx Power:  $(Cur_Optical_power_Tx)dBm, Warning range: [${Min_Tx_Warning_range},  ${Max_Tx_Warning_range}]dBm
+  ^Last physical up time   : ${Last_physical_up_time}
+  ^Last physical down time : ${Last_physical_down_time}
+  ^Current system time: ${Current_system_time}
+  ^Statistics last cleared:${Statistics_last_cleared}
+  ^    Last 300 seconds input rate: 501047633 bits/sec, 93002 packets/sec
+  ^    Last 300 seconds output rate: 228101925 bits/sec, 88946 packets/sec
+  ^    Input peak rate 3752792290 bits/sec, Record time: 2022-09-03 17:56:29+08:00
+  ^    Output peak rate 1570663433 bits/sec, Record time: 2022-01-13 10:16:27+08:00
+  ^    Input: 1052165755289288 bytes, 1834044579048 packets
+  ^    Output: 725757609011053 bytes, 1730408729437 packets
+  ^    Input:
+  ^      Unicast: 1834041850802 packets, Multicast: 2728243 packets
+  ^      Broadcast: 3 packets, JumboOctets: 278988837486 packets
+  ^      CRC: 0 packets, Symbol: 0 packets
+  ^      Overrun: 0 packets, InRangeLength: 0 packets
+  ^      LongPacket: 0 packets, Jabber: 0 packets, Alignment: 0 packets
+  ^      Fragment: 0 packets, Undersized Frame: 0 packets
+  ^      RxPause: 0 packets
+  ^    Output:
+  ^      Unicast: 1730405096772 packets, Multicast: 3632661 packets
+  ^      Broadcast: 4 packets, JumboOctets: 176258433767 packets
+  ^      Lost: 0 packets, Overflow: 0 packets, Underrun: 0 packets
+  ^      System: 0 packets, Overruns: 0 packets
+  ^      TxPause: 0 packets
+  ^    Local fault: normal, Remote fault: normal.
+  ^    Last 300 seconds input utility rate:  5.01%
+  ^    Last 300 seconds output utility rate: 2.28%

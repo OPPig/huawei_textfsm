@@ -1,0 +1,12 @@
+Value Interface (\S+)
+Value PHY (\S+)
+Value Auto_Neg (\S+)
+Value Duplex (\S+)
+Value BW (\d+[A-Z])
+Value InUti (\S+)
+Value OutUti (\S+)
+Value Trunk (\S+)
+Value Description (.*)
+
+Start
+  ^${Interface}\s+${PHY}\s+${Auto_Neg}\s+${Duplex}\s+${BW}\s+${InUti}\s+${OutUti}\s+${Trunk}\s+${Description} -> Record

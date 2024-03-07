@@ -1,0 +1,17 @@
+Value Filldown Slot (\d+)
+Value Filldown FanId (FAN\d+)
+Value FanNum (\S+)
+Value Filldown Present (\w+)
+Value Filldown Register (\w+)
+Value Filldown Status (\w+)
+Value Required Speed (\S+)
+Value Filldown Mode (\w+)
+Value Filldown Airflow_Direction (\S+)
+
+Start
+# 适配CE88
+  ^${Slot}\s+${FanId}\s+${FanNum}\s+${Status}\s+${Speed}\s+${Mode}\s+${Airflow_Direction} -> Continue.Record
+  ^\s+${FanNum}\s+${Speed} -> Record
+# 适配CE128
+  ^${FanId}\s+${FanNum}\s+${Present}\s+${Register}\s+${Status}\s+${Speed}\s+${Mode}\s+${Airflow_Direction} -> Continue.Record
+  ^\s+${FanNum}\s+${Speed} -> Record

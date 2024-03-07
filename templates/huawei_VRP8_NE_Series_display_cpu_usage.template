@@ -1,0 +1,9 @@
+Value System_cpu_use_rate ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+Value Cpu_utilization_for_five_seconds ((100|[1-9]?\d(\.\d\d?\d?)?)%)
+Value Cpu_utilization_for_one_minute ((100|[1-9]?\d(\.\d\d?\d?)?)%)	
+Value Cpu_utilization_for_five_minutes ((100|[1-9]?\d(\.\d\d?\d?)?)%)	
+
+# 简易版本
+Start
+  ^System cpu use rate is : ${System_cpu_use_rate}
+  ^Cpu utilization for five seconds: ${Cpu_utilization_for_five_seconds} ;  one minute: ${Cpu_utilization_for_one_minute} ;  five minutes: ${Cpu_utilization_for_five_minutes}. -> Record

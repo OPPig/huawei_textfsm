@@ -1,0 +1,9 @@
+Value No (\d+)
+Value Present (\S+)
+Value Mode (\S+)
+Value State (\S+)
+Value Abnormal_Number (\d+)
+Value Normal_Number (\d+)
+
+Start
+  ^${No}\s+${Present}\s+${Mode}\s+${State}\s+Abnormal\(${Abnormal_Number}\)\/Normal\(${Normal_Number}\) -> Record

@@ -1,0 +1,11 @@
+Value Slot (\d+)
+Value Device (\S+)
+Value Total_Memory_MB (\d+)
+Value Used_Memory_MB (\d+)
+Value Used_Percentage (\d+%)
+
+Start
+  ^System Disk Usage Information: -> Disk
+
+Disk
+  ^${Slot}\s+${Device}\s+${Total_Memory_MB}\s+${Used_Memory_MB}\s+${Used_Percentage} -> Record

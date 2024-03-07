@@ -1,0 +1,17 @@
+Value D_IP (\S+)
+Value Packet_Size (\d+)
+Value Packet_Transmitted (\d+)
+Value Packet_Received (\d+)
+Value Packet_Loss (.*)
+Value Round_trip_Min (\d+)
+Value Round_trip_Avg (\d+)
+Value Round_trip_Max (\d+)
+
+Start
+  #匹配ping通
+  ^\s+PING\s${D_IP}:\s${Packet_Size}\s+data bytes, press CTRL_C to break 
+  ^\s+${Packet_Transmitted}.*transmitted
+  ^\s+${Packet_Received}.*received
+  ^\s+100.00% packet loss -> Record
+  ^\s+${Packet_Loss} packet loss
+  ^\s+round-trip min/avg/max = ${Round_trip_Min}\S${Round_trip_Avg}\S${Round_trip_Max} ms -> Record

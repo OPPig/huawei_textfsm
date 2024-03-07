@@ -1,0 +1,26 @@
+Value Candidate_path_Preference (\d+)
+Value Path_State (\S+)
+Value Path_Type (\S+)
+Value Protocol_Origin (\S+)
+Value Originator (.*)
+Value Discriminator (\S+)
+Value Binding_SID (\S+)
+Value GroupId (\S+)
+Value Policy_Name (\S+)
+Value Template_ID (\S+)
+Value Path_Verification (\S+)
+Value DelayTimerRemain (\S+)
+Value Network_Slice_ID (\S+)
+Value Segment_List_Count (\d+)
+
+
+#处理Candidate-path Count到Segment-List Count
+Start                         
+ ^ Candidate-path Preference : ${Candidate_path_Preference}
+ ^ Path State\s+: ${Path_State}\s+Path Type\s+: ${Path_Type}
+ ^ Protocol-Origin\s+: ${Protocol_Origin}\s+Originator\s+: ${Originator}
+ ^ Discriminator\s+: ${Discriminator}\s+Binding SID\s+: ${Binding_SID}
+ ^ GroupId\s+: ${GroupId}\s+Policy Name\s+: ${Policy_Name}
+ ^ Template ID\s+: ${Template_ID}\s+Path Verification\s+: ${Path_Verification}
+ ^ DelayTimerRemain\s+: ${DelayTimerRemain}\s+Network Slice ID\s+: ${Network_Slice_ID}
+ ^ Segment-List Count\s+: ${Segment_List_Count} -> Record

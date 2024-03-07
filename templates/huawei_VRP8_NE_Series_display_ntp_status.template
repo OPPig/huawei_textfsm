@@ -1,0 +1,26 @@
+Value clock_status (.*)
+Value clock_stratum (.*)
+Value reference_clock_ID (.*)
+Value nominal_frequency (.*)
+Value actual_frequency (.*)
+Value clock_precision (.*)
+Value clock_offset (.*)
+Value root_delay (.*)
+Value root_dispersion (.*)
+Value peer_dispersion (.*)
+Value reference_time (.*)
+Value synchronization_state (.*)
+
+Start
+  ^\s+clock status:\s+${clock_status}
+  ^\s+clock stratum:\s+${clock_stratum}
+  ^\s+reference clock ID:\s+${reference_clock_ID}
+  ^\s+nominal frequency:\s+${nominal_frequency}
+  ^\s+actual frequency:\s+${actual_frequency}
+  ^\s+clock precision:\s+${clock_precision}
+  ^\s+clock offset:\s+${clock_offset}
+  ^\s+root delay:\s+${root_delay}
+  ^\s+root dispersion:\s+${root_dispersion}
+  ^\s+peer dispersion:\s+${peer_dispersion}
+  ^\s+reference time:\s+${reference_time}
+  ^\s+synchronization state:\s+${synchronization_state} -> Record

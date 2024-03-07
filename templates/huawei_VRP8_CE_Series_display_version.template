@@ -1,0 +1,11 @@
+Value Device_VRP_Version (Version\s\d+.\d+)
+Value Device_Version ((V.*))
+Value Device_Model (.*)	
+Value Device_Uptime (.*)	
+Value Required Device_Path (V.*)
+
+# 简易版不解析板卡内容
+Start
+  ^.*${Device_VRP_Version}\s\(.*\s+${Device_Version}\)
+  ^${Device_Model}\suptime\sis\s${Device_Uptime}
+  ^Patch Version:\s${Device_Path} -> Record

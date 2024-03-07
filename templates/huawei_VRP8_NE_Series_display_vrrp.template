@@ -1,0 +1,49 @@
+Value Info (.*)
+Value Interface (\S+)
+Value VRID (\S+)
+Value State (\S+)
+Value Virtual_IP (\d+\.\d+\.\d+\.\d+)
+Value Master_IP (\d+\.\d+\.\d+\.\d+)
+Value Local_IP (\d+\.\d+\.\d+\.\d+)
+Value PriorityRun (\d+)
+Value PriorityConfig (\d+)
+Value MasterPriority (\d+)
+Value Preempt (\S+)
+Value Delay_Time (\S+)
+Value Hold_Multiplier (\d+)
+Value TimerRun (\S+)
+Value TimerConfig (\S+)
+Value Auth_Type (\S+)
+Value Virtual_MAC (\S+)
+Value Check_TTL (\S+)
+Value Config_Type (\S+)
+Value Backup_forward (\S+)
+Value Track_IF (\S+)
+Value Priority_Reduced (\d+)
+Value IF_State (\S+)
+Value Create_Time (\S+)
+Value Last_Change_Time (\S+)
+
+Start
+  ^Info:\s+${Info} -> Record
+  ^${Interface}\s+\|\s+${VRID}
+  ^State\s+:\s+${State}
+  ^Virtual IP\s+:\s+${Virtual_IP}
+  ^Master IP\s+:\s+${Master_IP}
+  ^Local IP\s+:\s+${Local_IP}
+  ^PriorityRun\s+:\s+${PriorityRun}
+  ^PriorityConfig\s+:\s+${PriorityConfig}
+  ^MasterPriority\s+:\s+${MasterPriority}
+  ^Preempt\s+:\s+${Preempt}\s+Delay Time\s+:\s+${Delay_Time} 
+  ^Hold Multiplier:\s+${Hold_Multiplier}
+  ^TimerRun\s+:\s+${TimerRun}
+  ^TimerConfig\s+:\s+${TimerConfig}
+  ^Auth Type\s+:\s+${Auth_Type}
+  ^Virtual MAC\s+:\s+${Virtual_MAC}
+  ^Check TTL\s+:\s+${Check_TTL}
+  ^Config Type\s+:\s+${Config_Type}
+  ^Backup-forward\s+: ${Backup_forward}
+  ^Track IF\s+:\s+${Track_IF}\s+Priority Reduced\s+:\s+${Priority_Reduced}
+  ^IF State\s+:\s+${IF_State} 
+  ^Create Time\s+:\s+${Create_Time}
+  ^Last Change Time\s+:\s+${Last_Change_Time} -> Record

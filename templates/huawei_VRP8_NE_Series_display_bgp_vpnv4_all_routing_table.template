@@ -1,0 +1,26 @@
+Value Filldown VPN_NAME (\S+)
+Value Status_codes ([*>dxahisS ]{1})
+Value Route_SELECTION ([*>dxahisS ]{1})
+Value ROUTE_SOURCE ([*>dxahisS ]{1})
+Value Filldown Network ([A-Fa-f0-9:\.]+\/\d+)
+Value Required NextHop ([A-Fa-f0-9:\.]+)
+Value MED ((\d+|\s))
+Value LocPrf (\d+)
+Value PrefVal (\d+)
+Value AS_Path ((\s\d+)*)
+Value ORIGIN ([ie\?])
+
+Start
+  ^ VPN-Instance ${VPN_NAME}, Router ID \S+: -> Bgp_table
+
+Bgp_table
+  #LP有MED没有
+  ^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${Network}\s+${NextHop}\s{20,}${LocPrf}\s+${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  ^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${NextHop}\s+${LocPrf}\s{20,}${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  #MED有LP没有
+  #^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${Network}\s+${NextHop}\s+${MED}\s+${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  #^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${NextHop}\s+${MED}\s+${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  #MED和LP都存在场景PrefVal为0
+  ^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${Network}\s+${NextHop}\s+${MED}\s+${LocPrf}\s+${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  ^\s${Status_codes}${Route_SELECTION}${ROUTE_SOURCE}\s+${NextHop}\s+${MED}\s+${LocPrf}\s+${PrefVal}\s+${AS_Path}${ORIGIN} -> Record
+  ^ VPN-Instance ${VPN_NAME}, Router ID \S+: -> Continue

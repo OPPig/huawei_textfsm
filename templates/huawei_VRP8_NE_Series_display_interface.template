@@ -1,0 +1,36 @@
+Value Interface_Num (\S+)
+Value Interface_State (UP|DOWN|Administratively DOWN)
+Value Vendor_PN (.*)
+Value Vendor_Name ((\S+\s\S+|\S+))
+Value Port_BW (\d+\S+)
+Value Transceiver_max_BW (\d+\S+)
+Value Transceiver_Mode (\S+)
+Value Transmission_Distance (\d+\S+)
+Value WaveLength (.*)
+Value Rx_Warning_range (.*dBm)
+Value Tx_Warning_range (.*dBm)
+Value List Optical_power_Rx (.*dBm)
+Value List Optical_power_Tx (.*dBm)
+Value Required Current_system_time (.*)
+
+#有缺陷，千兆万兆无法看到波长，应该是匹配到了100G场景，导致失效，后面可以试试状态、匹配100G就进入到对应的状态，其他的就进行正常匹配，需要测试一下NE8000的100G场景接口编号不同，50|100G和100G两种不同的开通
+Start
+  #100G接口(MPO场景)
+  ^${Interface_Num}\scurrent\sstate\s\S\s${Interface_State}
+  ^The Vendor PN is\s${Vendor_PN}
+  ^The Vendor Name is\s${Vendor_Name}
+  ^Port BW: ${Port_BW}, Transceiver max BW: ${Transceiver_max_BW}, Transceiver Mode: ${Transceiver_Mode}
+  ^.*Transmission Distance: ${Transmission_Distance}
+  ^WaveLength:\s${WaveLength}
+  ^Rx Warning range: ${Rx_Warning_range}, Tx Warning range: ${Tx_Warning_range} -> Continue
+  ^Rx\d\sPower:\s+${Optical_power_Rx},\sTx\d\sPower:\s+${Optical_power_Tx} 
+  ^Current system time: ${Current_system_time} -> Record
+  #非100G接口MPO场景（UP或者DOWN LOS）
+  ^${Interface_Num}\scurrent\sstate\s\S\s${Interface_State}
+  ^The Vendor PN is\s${Vendor_PN}
+  ^The Vendor Name is\s${Vendor_Name}
+  ^Port BW: ${Port_BW}, Transceiver max BW: ${Transceiver_max_BW}, Transceiver Mode: ${Transceiver_Mode}
+  ^WaveLength:\s+${WaveLength}, Transmission Distance: ${Transmission_Distance}
+  ^Rx Power:\s+${Optical_power_Rx}, Warning range: ${Rx_Warning_range}
+  ^Tx Power:\s+${Optical_power_Tx}, Warning range: ${Tx_Warning_range}
+  ^Current system time: ${Current_system_time} -> Record

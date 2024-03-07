@@ -1,0 +1,11 @@
+Value Interface_Num (\S+)
+Value Interface_State_PHY (\S+)
+Value Interface_State_Protocol (\S+)
+Value Interface_InUti (\S+)
+Value Interface_OutUti (\S+)
+Value Interface_inErrors (\d+)
+Value Interface_outErrors (\d+)
+
+#取值CRC和Lost参数，其他没有做记录
+Start
+  ^\s{0,2}${Interface_Num}\s+${Interface_State_PHY}\s+${Interface_State_Protocol}\s+${Interface_InUti}\s+${Interface_OutUti}\s+${Interface_inErrors}\s+${Interface_outErrors} -> Record

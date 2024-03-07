@@ -1,0 +1,9 @@
+Value Slot (\d+)
+Value CPU_Usage (\d+%)
+Value Upper_Limit (\d+%)
+
+Start
+  ^System CPU Usage Information: -> CPU
+
+CPU
+  ^${Slot}\s+${CPU_Usage}\s+${Upper_Limit} -> Record

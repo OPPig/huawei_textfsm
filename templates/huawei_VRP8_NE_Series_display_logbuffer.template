@@ -1,0 +1,30 @@
+Value TIMESTAMP_yyyymmdd (\d\d\d\d-\d\d-\d\d)
+#时间戳
+Value TIMESTAMP_hhmmss (\S+)
+#时间戳
+Value HOSTNAME (\S+)
+#主机名或虚拟系统（VS）名称
+Value version_number (\d{2})
+#版本号
+Value module_name (\S+)
+#模块名
+Value Log_level (\d)
+#日志的级别
+Value information_summary (\w+)
+#信息摘要
+Value Category_of_information (\w+)
+#信息类别
+Value System_internal_component_number (\S+=\S+)
+#系统内部组件编号
+Value log_details (.*)
+#详细信息
+
+#表示日志信息类型：
+#(l)：Log
+#(t)：Trap
+#(d)：Debug
+#(s)：Security log
+#(m): Maintenance log
+
+Start
+  ^${TIMESTAMP_yyyymmdd}\s+${TIMESTAMP_hhmmss}\s+${HOSTNAME}\s+\%\%${version_number}${module_name}\/${Log_level}\/${information_summary}\(${Category_of_information}\):${System_internal_component_number};${log_details} -> Record

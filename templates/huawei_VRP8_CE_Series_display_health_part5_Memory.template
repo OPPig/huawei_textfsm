@@ -1,0 +1,11 @@
+Value Slot (\d+)
+Value Total_Memory (\d+)
+Value Used_Memory (\d+)
+Value Used_Percentage (\d+%)
+Value Upper_Limit (\d+%)
+
+Start
+  ^System Memory Usage Information: -> Memory
+  
+Memory
+  ^${Slot}\s+${Total_Memory}\s+${Used_Memory}\s+${Used_Percentage}\s+${Upper_Limit} -> Record

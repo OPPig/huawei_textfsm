@@ -1,0 +1,10 @@
+Value Collection_time (.*)
+Value System_CPU_Using_Percentage (\d+\%)
+Value five_seconds (\d+\%)
+Value one_minute (\d+\%)
+Value five_minutes (\d+\%)
+
+Start
+  ^CPU utilization statistics at ${Collection_time}
+  ^System CPU Using Percentage :\s+${System_CPU_Using_Percentage}
+  ^CPU utilization for five seconds: ${five_seconds}, one minute: ${one_minute}, five minutes: ${five_minutes}\. -> Record

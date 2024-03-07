@@ -1,0 +1,5 @@
+Value Interface_Num (\S+)
+Value Interface_State (UP|DOWN|Administratively DOWN)
+
+Start
+  ^${Interface_Num}\scurrent\sstate\s\S\s${Interface_State} -> Record
